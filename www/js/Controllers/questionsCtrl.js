@@ -1,6 +1,8 @@
 angular.module('starter.controllers')
-.controller('QuestionsCtrl',['$scope', '$stateParams', 'testInfo', 'TKAnswersService', '$state', '$ionicHistory',
-function($scope, $stateParams, testInfo, TKAnswersService, $state, $ionicHistory) {
+.controller('QuestionsCtrl',['$scope', '$stateParams', 'testInfo', 'TKAnswersService', '$state', '$ionicHistory', 'TKResultsButtonService',
+function($scope, $stateParams, testInfo, TKAnswersService, $state, $ionicHistory, TKResultsButtonService) {
+
+
 $scope.qNumber = $stateParams.questionID;
 
 testInfo.forEach(function(infoDict) {
@@ -28,7 +30,8 @@ $scope.goBack = function() {
         TKAnswersService.eraseLastAnswer();
       $ionicHistory.goBack();
  };
- function performRequest()
+ 
+function performRequest()
 {
     var answersDict = angular.copy(TKAnswersService.getAnswers());
     var date = new Date();
@@ -37,11 +40,12 @@ $scope.goBack = function() {
     $ionicHistory.nextViewOptions({
          historyRoot: true
     });
+    $state.go('results');
+    TKResultsButtonService.setShouldShowMenuButton(true);
+    $ionicHistory.nextViewOptions({
+         historyRoot: true
+    });
     $state.go('lobby');
 }
 
-
-
-}]); 
-
-
+}]);

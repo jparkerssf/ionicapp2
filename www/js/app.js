@@ -3,11 +3,11 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'TKTestQuestions', 'starter.controllers', 'TKTestAnswers'])
+angular.module('starter', ['ionic', 'TKTestQuestions', 'starter.controllers', 'TKTestAnswers', 'chart.js', 'TKResultsButton'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
+    if (window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -17,32 +17,58 @@ angular.module('starter', ['ionic', 'TKTestQuestions', 'starter.controllers', 'T
       // a much nicer keyboard experience.
       cordova.plugins.Keyboard.disableScroll(true);
     }
-    if(window.StatusBar) {
+    if (window.StatusBar) {
       StatusBar.styleDefault();
     }
-    
- 
-  
+
+
+
   });
-  
-  
+
+
 })
+
+
+
 .config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/');
   $stateProvider
-  .state('lobby', {
-    url: '/',
-    templateUrl: 'Templates/lobby.html',
-  })
- 
-.state('question', {
+    .state('lobby', {
+      url: '/',
+      templateUrl: 'Templates/lobby.html',
+      controller: 'LobbyCtrl'
+    })
+
+  .state('question', {
     url: '/question:questionID',
     templateUrl: 'Templates/question.html',
     controller: 'QuestionsCtrl',
     resolve: {
       testInfo: function($stateParams, TKTestQuestionService) {
+
+
+
         return TKTestQuestionService.getQuestion($stateParams.questionID);
       }
     }
-})
+  })
+ .state('results', {
+    url: '/results',
+    templateUrl: 'Templates/results.html',
+    controller: 'ResultsCtrl',
+  })
+  .state('history', {
+    url: '/history',
+    templateUrl: 'Templates/history.html',
+    controller: 'HistoryCtrl',
+    resolve: {
+      tests: ['TKAnswersService', function(TKAnswersService) {
+        return TKAnswersService.getTests();
+      }]
+    }
+  })
+
+
+
+
 });

@@ -2,11 +2,20 @@ angular.module('TKTestQuestions', [])
 .service('TKTestQuestionService', ['$http', function ($http){
     var service = this;
     
-    
-    service.all = function () {
-        return $http.get('files/questions.json');
+   var questions = [];
+
+service.all = function () {
+        $http.get('files/questions.json')
+        .then(function(response){
+            if(response.status == 200)
+            {
+                questions = response.data;
+            }
+        });
  };
- service.getQuestion = function(questionID)
+ 
+ 
+service.getQuestion = function(questionID)
 {
         var results = [];
         questions.forEach(function(question){
@@ -16,10 +25,4 @@ angular.module('TKTestQuestions', [])
         });
         return results;
 };
-    
-    
-    
-    
-    
 }]);
-
