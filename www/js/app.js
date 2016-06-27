@@ -56,6 +56,7 @@ angular.module('starter', ['ionic', 'TKTestQuestions', 'starter.controllers', 'T
     url: '/results',
     templateUrl: 'Templates/results.html',
     controller: 'ResultsCtrl',
+    cache: false
   })
   .state('history', {
     url: '/history',

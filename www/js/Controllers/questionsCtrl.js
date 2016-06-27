@@ -40,12 +40,12 @@ function performRequest()
     $ionicHistory.nextViewOptions({
          historyRoot: true
     });
-    $state.go('results');
+    
     TKResultsButtonService.setShouldShowMenuButton(true);
     $ionicHistory.nextViewOptions({
          historyRoot: true
     });
-    $state.go('lobby');
+    $state.go('results');
 }
 
 }]);
