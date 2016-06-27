@@ -21,8 +21,8 @@ $scope.menuButtonTapped = function()
     return (value/12)*100;
 }
 
-$scope.data = [[returnPercentage(answersInfo["Competing"]), returnPercentage(answersInfo["Collaborating"]),
-returnPercentage(answersInfo["Compromising"]), returnPercentage(answersInfo["Avoiding"]), returnPercentage(answersInfo["Accommodating"])]];
+$scope.data = [[returnPercentage(answersInfo["competing"]), returnPercentage(answersInfo["collaborating"]),
+returnPercentage(answersInfo["compromising"]), returnPercentage(answersInfo["avoiding"]), returnPercentage(answersInfo["accommodating"])]];
 
 $scope.options = {
         scaleIntegersOnly: true,
