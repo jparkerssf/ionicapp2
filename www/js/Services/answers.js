@@ -1,5 +1,5 @@
 angular.module('TKTestAnswers',[])
-.service('TKAnswersService',['$window', function ($window) {
+.service('TKAnswersService',['$window', 'TestResultsRest', function ($window,TestResultsRest) {
     var service = this;
     var answerCategories = {
         "competing": 0,
@@ -11,7 +11,16 @@ angular.module('TKTestAnswers',[])
     var categoriesStack = [];
     
      service.getTests = function() {
-        return JSON.parse($window.localStorage.tests);
+       // return JSON.parse($window.localStorage.tests)||[];
+       return TestResultsRest.get()
+       .then(function(res)  {
+           console.log(res);
+           return res.data; 
+       }, function(err){
+           console.log(err);
+           return err;
+       });
+       
     };
    
     service.setAnswers = function(answers)
@@ -46,8 +55,11 @@ angular.module('TKTestAnswers',[])
    
     service.saveTest = function(test) {
         var tempTests = $window.localStorage.tests === undefined ? [] : JSON.parse($window.localStorage.tests);
-        tempTests.push(test);
-        $window.localStorage.tests = JSON.stringify(tempTests);
+        // tempTests.push(test);
+        // $window.localStorage.tests = JSON.stringify(tempTests);
+        // Todo: Change to dynamic UserID
+        test.userID = "5772c9e89ea15c901c0c54db"
+        TestResultsRest.save(test);
     };
     
    

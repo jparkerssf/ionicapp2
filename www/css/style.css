@@ -1,1 +1,8 @@
 /* Empty. Add your own CSS if you like */
+ion-content {
+background: #808080;
+}
+
+form label.has-errors {
+  border: 1px solid red;
+}
