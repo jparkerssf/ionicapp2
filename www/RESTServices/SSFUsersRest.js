@@ -10,13 +10,15 @@ SSFUsersRest.post = function(newUserData) {
           });
         };
         
-      SSFUsersRest.get = function() {
+  SSFUsersRest.get = function(user) {
  return $http({
-            url: "https://ionicapp2-jadtheparker.c9users.io/api/SSFUsers",
-            method:'GET'
+            url: "https://ionicapp2-jadtheparker.c9users.io/api/SSFUsers/login",
+            method:'POST',
+             data: user
           });
         };
-        
+           
+
    }]);
    
    

@@ -63,8 +63,17 @@ angular.module('starter', ['ionic', 'TKTestQuestions', 'starter.controllers', 'T
     templateUrl: 'Templates/history.html',
     controller: 'HistoryCtrl',
     resolve: {
-      tests: ['TKAnswersService', function(TKAnswersService) {
-        return TKAnswersService.getTests();
+      tests: ['TKAnswersService','$window', function(TKAnswersService, $window) {
+        
+ return TKAnswersService.getTests($window.localStorage.userID, $window.localStorage.token)
+        .then(function(res)  {
+           console.log(res);
+           return res.data; 
+       }, function(err){
+           alert("There was an error retrieving your information");
+           return err;
+       });
+       
       }]
     }
   })
@@ -86,8 +95,5 @@ angular.module('starter', ['ionic', 'TKTestQuestions', 'starter.controllers', 'T
      
   })
   
-  
-
-
 
 });

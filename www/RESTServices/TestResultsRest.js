@@ -9,15 +9,18 @@ angular.module('RESTServices')
           data:  test
         })
     };
-
-    TestResultsRest.get = function(){
+    var apiUrl = 
+    TestResultsRest.get = function(userID,token){
         return $http({
-          url:' https://ionicapp2-jadtheparker.c9users.io/api/TestResults',
+          url:' https://ionicapp2-jadtheparker.c9users.io/api/TestResults?filter[where][userID]='+userID,
           method:'GET',
-        })
-    };
-
-    
+         
+              headers: {
+                  'Authorization': token
+              }
+          });
+      };
+   
 }]);
 
    

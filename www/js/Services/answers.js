@@ -10,16 +10,9 @@ angular.module('TKTestAnswers',[])
     };
     var categoriesStack = [];
     
-     service.getTests = function() {
+     service.getTests = function(token,userID) {
        // return JSON.parse($window.localStorage.tests)||[];
-       return TestResultsRest.get()
-       .then(function(res)  {
-           console.log(res);
-           return res.data; 
-       }, function(err){
-           console.log(err);
-           return err;
-       });
+       return TestResultsRest.get(token,userID);
        
     };
    
@@ -54,11 +47,8 @@ angular.module('TKTestAnswers',[])
     };
    
     service.saveTest = function(test) {
-        var tempTests = $window.localStorage.tests === undefined ? [] : JSON.parse($window.localStorage.tests);
-        // tempTests.push(test);
-        // $window.localStorage.tests = JSON.stringify(tempTests);
-        // Todo: Change to dynamic UserID
-        test.userID = "5772c9e89ea15c901c0c54db"
+      
+        test.userID=$window.localStorage.userID;
         TestResultsRest.save(test);
     };
     
