@@ -4,12 +4,15 @@ angular.module('starter.controllers')
             $scope.signupForm = function(form) {
                 if (form.$invalid) {
                     return alert("Please complete the form before proceeding.");
+       
                 }
 
 
                 SSFUsersRest.post($scope.user)
                     .then(function(response) {
                         if (response.status == 200) {
+                          $scope.user={};
+                
                             $state.go('lobby');
                             $window.localStorage.token=response.data.token;
                             $window.localStorage.userID = response.data.id;

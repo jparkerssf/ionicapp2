@@ -11,9 +11,10 @@ angular.module('starter.controllers')
                 SSFUsersRest.get($scope.user)
                     .then(function(response) {
                         if (response.status == 200) {
+                            $scope.user={};
                             $state.go('lobby');
                             $window.localStorage.token=response.data.id;
-                            $window.localStorage.userID = response.data.userID;
+                            $window.localStorage.userID = response.data.userId;
                         }
                     }, function(error) {
                         if (error.status == 404) {
