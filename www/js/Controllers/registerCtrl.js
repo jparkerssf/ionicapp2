@@ -8,7 +8,7 @@ angular.module('starter.controllers')
                 }
 
 
-                SSFUsersRest.post($scope.user)
+                SSFUsersRest.post($scope.user) 
                     .then(function(response) {
                         if (response.status == 200) {
                           $scope.user={};
