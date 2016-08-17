@@ -1,13 +1,12 @@
 angular.module('starter.controllers')
-    .controller('registerCtrl', ['$scope', '$state', 'SSFUsersRest','$window', function($scope, $state, SSFUsersRest,$window) {
+    .controller('registerCtrl', ['$scope', '$state', 'SSFUsersRest','$window', 
+    function($scope, $state, SSFUsersRest,$window) {
             $scope.user = {};
             $scope.signupForm = function(form) {
                 if (form.$invalid) {
                     return alert("Please complete the form before proceeding.");
        
                 }
-
-
                 SSFUsersRest.post($scope.user) 
                     .then(function(response) {
                         if (response.status == 200) {
@@ -28,5 +27,6 @@ angular.module('starter.controllers')
                             console.log("The world has ended");
                         }
                     });
+
            };
             }]);
